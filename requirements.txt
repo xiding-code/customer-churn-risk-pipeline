@@ -1,0 +1,17 @@
+# Env used to run 01–04 (conda base, Python 3.13). Exact pins for pip-managed pkgs;
+# pandas/numpy/scikit-learn/openpyxl are conda-managed in this env (regenerate with `conda list`).
+pandas
+numpy
+scikit-learn
+openpyxl
+matplotlib==3.10.0
+xgboost==3.2.0        # boosted-tree baseline; without it 04 silently falls back to HistGradientBoosting. (Corrected 2026-07-05: 3.3.0 not on PyPI, max is 3.2.0; George confirmed 3.2.0.)
+torch==2.8.0          # GRU backend (Keras 3 on torch — TF 2.20/2.21 segfault in this env)
+keras==3.15.0
+# --- serving (zerve/app.py) ---
+fastapi
+uvicorn
+joblib
+pydantic
+scikit-learn==1.6.1   # artifacts pickled under 1.6.1 — pin for clean unpickle in fresh envs
+# crewai              # optional: zerve/crew_workflow.py full agentic run
